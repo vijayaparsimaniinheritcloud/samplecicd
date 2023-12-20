@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:email="http://www.mulesoft.org/schema/mule/email"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c7301a3d-8f64-4d7f-b41e-1e34025bbf93" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="c9df3770-acf8-4dd2-87be-03db1eb0a38b" >
+		<salesforce:basic-connection username="vijaya.parsimani-mmtr@force.com" password="Vijji@333" securityToken="e7Es8yTPsBZyCde6MFvN3Hk8" />
+	</salesforce:sfdc-config>
+			<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="4e1838fb-4f35-4bd6-b61a-e1743f556a4d" >
+		<email:smtp-connection host="smtp.gmail.com" port="587" user="vijayaparsimani@gmail.com" password="xamulazsgthddinr" >
+			<email:properties >
+				<email:property key="mail.smtp.starttls.enable" value="true" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+	<flow name="1Flow1" doc:id="b29c0be9-58b1-4d64-bd0e-e6458930b0a7" >
+		<http:listener doc:name="Listener" doc:id="aa35ea29-0abc-4b74-be26-4e4e272986f6" config-ref="HTTP_Listener_config" path="/error"/>
+		<set-payload value='#["cicd testing"]' doc:name="Set Payload" doc:id="4231a450-8e97-4a7f-adda-ec23e46f74e7" />
+	</flow>
+</mule>
